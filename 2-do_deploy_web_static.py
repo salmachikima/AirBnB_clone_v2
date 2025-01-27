@@ -11,8 +11,7 @@ env.hosts = ["100.26.17.7", "34.232.78.65"]
 
 
 def do_pack():
-    """packages all contents from web_static into .tgz archive
-    """
+    """generates a .tgz archine from contents of web_static"""
     n = datetime.now().strftime("%Y%m%d%H%M%S")
     local('mkdir -p versions')
     result = local('tar -cvf versions/web_static_{}.tgz web_static'
@@ -24,11 +23,11 @@ def do_pack():
 
 
 def do_deploy(archive_path):
-    """Deploys a static archive to my web servers"""
+    """static archive to my web servers"""
 
     if not os.path.isfile(archive_path):
         print('archive file does not exist...')
-        return False  # Returns False if the file at archive_path doesnt exist
+        return False
     try:
         archive = archive_path.split('/')[1]
         no_archive_ext = archive.split('.')[0]
@@ -63,8 +62,6 @@ def do_deploy(archive_path):
     if Res.failed:
         print('failed to remove first copy of extraction after move...')
         return False
-
-    # clean up old release and remove it.
 
     Res = run('rm -rf /data/web_static/current')
     if Res.failed:
