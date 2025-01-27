@@ -4,7 +4,6 @@ apt-get -y update
 apt-get -y install nginx
 mkdir -p /data/web_static/shared/
 mkdir -p /data/web_static/releases/test/
-#overwrite the content of the file
 echo "<html>
   <head>
   </head>
